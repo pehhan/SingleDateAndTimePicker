@@ -9,10 +9,8 @@ import android.widget.TextView;
 
 import com.github.florent37.singledateandtimepicker.R;
 import com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker;
-import com.github.florent37.singledateandtimepicker.widget.WheelMinutePicker;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import static com.github.florent37.singledateandtimepicker.widget.SingleDateAndTimeConstants.STEP_MINUTES_DEFAULT;
@@ -25,6 +23,8 @@ public class SingleDateAndTimePickerDialog extends BaseDialog {
 
     @Nullable
     private String title;
+    @Nullable
+    private String subtitle;
     @Nullable
     private String todayText;
     @Nullable
@@ -101,6 +101,16 @@ public class SingleDateAndTimePickerDialog extends BaseDialog {
             }
         }
 
+        final TextView subtitleTextView = view.findViewById(R.id.sheetSubtitle);
+        if (subtitleTextView != null) {
+            if (subtitle != null && !subtitle.isEmpty()) {
+                subtitleTextView.setText(subtitle);
+                subtitleTextView.setVisibility(View.VISIBLE);
+            } else {
+                subtitleTextView.setVisibility(View.GONE);
+            }
+        }
+
         picker.setTodayText(todayText);
 
         final View pickerTitleHeader = view.findViewById(R.id.pickerTitleHeader);
@@ -173,6 +183,11 @@ public class SingleDateAndTimePickerDialog extends BaseDialog {
 
     public SingleDateAndTimePickerDialog setTitle(@Nullable String title) {
         this.title = title;
+        return this;
+    }
+
+    public SingleDateAndTimePickerDialog setSubtitle(@Nullable String subtitle) {
+        this.subtitle = subtitle;
         return this;
     }
 
@@ -290,6 +305,9 @@ public class SingleDateAndTimePickerDialog extends BaseDialog {
         private String title;
 
         @Nullable
+        private String subtitle;
+
+        @Nullable
         private String todayText;
 
         private boolean bottomSheet;
@@ -337,6 +355,11 @@ public class SingleDateAndTimePickerDialog extends BaseDialog {
 
         public Builder title(@Nullable String title) {
             this.title = title;
+            return this;
+        }
+
+        public Builder subtitle(@Nullable String subtitle) {
+            this.subtitle = subtitle;
             return this;
         }
 
@@ -453,6 +476,7 @@ public class SingleDateAndTimePickerDialog extends BaseDialog {
         public SingleDateAndTimePickerDialog build() {
             final SingleDateAndTimePickerDialog dialog = new SingleDateAndTimePickerDialog(context, bottomSheet)
                     .setTitle(title)
+                    .setSubtitle(subtitle)
                     .setTodayText(todayText)
                     .setListener(listener)
                     .setCurved(curved)

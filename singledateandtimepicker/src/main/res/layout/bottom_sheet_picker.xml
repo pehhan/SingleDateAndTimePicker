@@ -16,12 +16,14 @@
         android:orientation="vertical"
         >
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/pickerTitleHeader"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp"
             android:background="@color/picker_background"
             android:layout_marginBottom="20dp"
+            android:orientation="vertical"
             >
 
             <TextView
@@ -36,7 +38,19 @@
                 android:textColor="@android:color/white"
                 />
 
-        </FrameLayout>
+            <TextView
+                android:id="@+id/sheetSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:text="The subtitle"
+                android:textColor="@android:color/white"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
 
         <com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker
             android:id="@+id/picker"
